@@ -31,6 +31,7 @@ export const register = async (req, res) => {
             message: 'Account created successfully',
             success: true
         })
+
     } catch (error) {
         console.log('Error in Register Controller ' + error.message)
         return res.status(500).json({
@@ -119,18 +120,14 @@ export const updateProfile = async (req, res) => {
     try {
         const { fullname, email, phoneNumber, bio, skills } = req.body;
         const file = req.file;
-        if (!fullname || !email || !phoneNumber || !bio || !skills) {
-            return res.status(400).json({
-                message: 'Something is missing',
-                success: false
-            });
-        }
 
         // setting up the file by cloudinary
-
-        const skillsArray = skills.split(',');
+        let skillsArray
+        if (skills) {
+            skillsArray = skills.split(',');
+        }
         const userId = req.id;  //middleware authentication
-        let user = await User.findById({ userId })
+        let user = await User.findById(userId)
         if (!user) {
             return res.status(400).json({
                 message: 'User not found',
@@ -139,11 +136,11 @@ export const updateProfile = async (req, res) => {
         }
 
         // updating data
-        user.fullname = fullname,
-            user.email = email,
-            user, phoneNumber = phoneNumber,
-            user.profile.bio = bio,
-            user.profile.skills = skillsArray
+        if (fullname) user.fullname = fullname
+        if (phoneNumber) user.phoneNumber = phoneNumber
+        if (bio) user.bio = bio
+        if (email) user.email = email
+        if (skillsArray) user.skills = skillsArray
 
         // resume comes later here.....
 
@@ -159,7 +156,7 @@ export const updateProfile = async (req, res) => {
         }
         return res.status(200).json({
             message: 'User updated successfully...',
-            uesr,
+            user,
             success: true,
         })
 
