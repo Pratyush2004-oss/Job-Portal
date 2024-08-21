@@ -1,7 +1,8 @@
-import { User } from "../modals/user.model.js";
+import { User } from "../models/user.model.js";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
+// user registration controller
 export const register = async (req, res) => {
     try {
         const { fullname, email, phoneNumber, password, role } = req.body;
@@ -33,7 +34,7 @@ export const register = async (req, res) => {
         })
 
     } catch (error) {
-        console.log('Error in Register Controller ' + error.message)
+        console.log('Error in Register user Controller ' + error.message)
         return res.status(500).json({
             message: "Internal server Error",
             success: false
@@ -41,6 +42,7 @@ export const register = async (req, res) => {
     }
 }
 
+// user login controller
 export const login = async (req, res) => {
     try {
         const { email, password, role } = req.body;
@@ -92,7 +94,7 @@ export const login = async (req, res) => {
             success: true
         })
     } catch (error) {
-        console.log('Error in Login Controller ' + error.message)
+        console.log('Error in Login user Controller ' + error.message)
         return res.status(500).json({
             message: "Internal server Error",
             success: false
@@ -100,6 +102,7 @@ export const login = async (req, res) => {
     }
 }
 
+// User Logout Controller
 export const logout = async (req, res) => {
     try {
         return res.status(200).cookie("token", '', { maxAge: 0 }).json({
@@ -108,7 +111,7 @@ export const logout = async (req, res) => {
         })
 
     } catch (error) {
-        console.log('Error in Logout Controller ' + error.message)
+        console.log('Error in user Logout Controller ' + error.message)
         return res.status(500).json({
             message: "Internal server Error",
             success: false
@@ -116,6 +119,7 @@ export const logout = async (req, res) => {
     }
 }
 
+// user update profile controller
 export const updateProfile = async (req, res) => {
     try {
         const { fullname, email, phoneNumber, bio, skills } = req.body;
@@ -161,7 +165,7 @@ export const updateProfile = async (req, res) => {
         })
 
     } catch (error) {
-        console.log('Error in Profile-Update Controller ' + error.message)
+        console.log('Error in user Profile-Update Controller ' + error.message)
         return res.status(500).json({
             message: "Internal server Error",
             success: false
