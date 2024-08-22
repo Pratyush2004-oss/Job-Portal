@@ -1,13 +1,35 @@
-import { useState } from 'react'
-import { Button } from './components/ui/button'
+import Login from './auth/Login';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Home from './Pages/Home';
+import Signup from './auth/Signup';
+
+const appRouter = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />
+  },
+  {
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/signup',
+    element: <Signup />
+  },
+  {
+    path: '/',
+    element: <Home />
+  },
+  {
+    path: '/',
+    element: <Home />
+  },
+]);
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div>
-      <h1 className='font-bold font-serif text-5xl'>Hi this is now my frontend pages</h1>
-      <Button className='my-5'>Click Here</Button>
+      <RouterProvider router={appRouter} />
     </div>
   )
 }
