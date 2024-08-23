@@ -9,7 +9,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 const Navbar = () => {
     const user = false;
     return (
-        <div className='bg-white '>
+        <div className='bg-white'>
             <div className='flex items-center w-full justify-between mx-auto max-w-7xl h-16 max-xl:p-5'>
                 <div>
                 <Link to={'/'}>
