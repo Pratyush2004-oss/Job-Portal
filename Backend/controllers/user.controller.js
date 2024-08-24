@@ -1,6 +1,8 @@
 import { User } from "../models/user.model.js";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import getDataUri from "../utils/dataUri.js";
+import cloudinary from "../utils/cloudinary.js";
 
 // user registration controller
 export const register = async (req, res) => {
@@ -12,10 +14,21 @@ export const register = async (req, res) => {
                 success: false
             });
         }
-        const user = await User.findOne({ email });
+        const file = req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+
+        let user = await User.findOne({ email });
         if (user) {
             return res.status(400).json({
                 message: 'User already registered with this email.',
+                success: false
+            })
+        }
+        user = await User.findOne({ phoneNumber });
+        if (user) {
+            return res.status(400).json({
+                message: 'User already registered with this mobile number.',
                 success: false
             })
         }
@@ -26,6 +39,9 @@ export const register = async (req, res) => {
             phoneNumber,
             password: hashedpassword,
             role,
+            profile: {
+                profilePic: cloudResponse.secure_url,
+            }
         })
 
         return res.status(201).json({
@@ -123,10 +139,13 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req, res) => {
     try {
         const { fullname, email, phoneNumber, bio, skills } = req.body;
-        const file = req.file;
 
         // setting up the file by cloudinary
-        let skillsArray
+        const file = req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+
+        let skillsArray;
         if (skills) {
             skillsArray = skills.split(',');
         }
@@ -142,11 +161,15 @@ export const updateProfile = async (req, res) => {
         // updating data
         if (fullname) user.fullname = fullname
         if (phoneNumber) user.phoneNumber = phoneNumber
-        if (bio) user.bio = bio
+        if (bio) user.profile.bio = bio
         if (email) user.email = email
-        if (skillsArray) user.skills = skillsArray
+        if (skills) user.profile.skills = skillsArray
 
         // resume comes later here.....
+        if (cloudResponse) {
+            user.profile.resume = cloudResponse.secure_url // save file url
+            user.profile.resumeOriginalName = file.originalname //save original file name 
+        }
 
         await user.save();
 
