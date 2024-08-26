@@ -1,5 +1,4 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
-import { Badge } from '@/components/ui/badge'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Edit, MoreHorizontal } from 'lucide-react'
@@ -22,7 +21,7 @@ const CompaniesTable = () => {
     return (
         <div>
             <Table>
-                <TableCaption>A list of your Applied jobs</TableCaption>
+                <TableCaption>A list of your recent Companies</TableCaption>
                 <TableHeader className='bg-slate-200'>
                     <TableRow>
                         <TableHead>Logo</TableHead>

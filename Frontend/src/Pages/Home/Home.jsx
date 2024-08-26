@@ -13,7 +13,7 @@ const Home = () => {
     useGetAllJobs();
     const navigate = useNavigate();
     useEffect(()=>{
-        if(user.role === 'recruiter'){
+        if(user && user.role === 'recruiter'){
             navigate('/admin/companies')
         }
     },[])
