@@ -95,7 +95,7 @@ const Login = () => {
                         </RadioGroup>
                     </div>
                     <Button type='submit' disabled={loading} className='w-full my-3'>{loading ? <LoaderPinwheel className='mr-2 w-4 h-4 animate-spin' /> : 'Submit'}</Button>
-                    <span className='text-sm'>Didn't hava an account <Link to={'/signup'}><span className='font-bold text-green-600'>Signup</span></Link></span>
+                    <span className='text-sm'>Didn't have an account <Link to={'/signup'}><span className='font-bold text-green-600'>Signup</span></Link></span>
 
                 </form>
             </div>
