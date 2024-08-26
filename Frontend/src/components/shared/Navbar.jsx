@@ -4,7 +4,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { LucideDoorOpen, Menu, User2 } from 'lucide-react'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator } from '../ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger} from '../ui/dropdown-menu'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'sonner'
 import axios from 'axios'
@@ -42,11 +42,23 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <div className='flex items-center gap-12'>
-                    <ul className='sm:flex hidden font-medium items-center gap-5'>
-                        <Link to={'/'}><l1>Home</l1></Link>
-                        <Link to={'/jobs'}><l1>Jobs</l1></Link>
-                        <Link to={'/browse'}><l1>Browse</l1></Link>
-                    </ul>
+                    {
+                        user && user.role === 'recruiter' ?
+                            (
+                                <ul className='sm:flex hidden font-medium items-center gap-5'>
+                                    <Link to={'/admin/companies'}><l1>Comapnies</l1></Link>
+                                    <Link to={'/admin/jobs'}><l1>Jobs</l1></Link>
+                                </ul>
+                            )
+                            :
+                            (
+                                <ul className='sm:flex hidden font-medium items-center gap-5'>
+                                    <Link to={'/'}><l1>Home</l1></Link>
+                                    <Link to={'/jobs'}><l1>Jobs</l1></Link>
+                                    <Link to={'/browse'}><l1>Browse</l1></Link>
+                                </ul>
+                            )
+                    }
                     {
                         !user ? (
                             <div>
@@ -77,11 +89,21 @@ const Navbar = () => {
                                     </Avatar>
                                 </PopoverTrigger>
                                 <PopoverContent className='max-md:w-60 w-80'>
-                                    <ul className='flex items-center justify-between my-2 sm:hidden font-medium mx-6'>
-                                        <Link to={'/'}><l1 className='hover:border-b-2'>Home</l1></Link>
-                                        <Link to={'/jobs'}><l1 className='hover:border-b-2'>Jobs</l1></Link>
-                                        <Link to={'/browse'}><l1 className='hover:border-b-2'>Browse</l1></Link>
-                                    </ul>
+                                    {user.role === 'recruiter' ?
+                                        (
+                                            <ul className='flex items-center justify-between my-2 sm:hidden font-medium mx-6'>
+                                                <Link to={'/admin/companies'}><l1>Comapnies</l1></Link>
+                                                <Link to={'/admin/jobs'}><l1>Jobs</l1></Link>
+                                            </ul>
+                                        )
+                                        :
+                                        (
+                                            <ul className='flex items-center justify-between my-2 sm:hidden font-medium mx-6'>
+                                                <Link to={'/'}><l1>Home</l1></Link>
+                                                <Link to={'/jobs'}><l1>Jobs</l1></Link>
+                                                <Link to={'/browse'}><l1>Browse</l1></Link>
+                                            </ul>
+                                        )}
                                     <div className='flex justify-evenly items-center'>
                                         <Avatar>
                                             <AvatarImage src={user.profile.profilePic ? user.profile.profilePic : "https://github.com/shadcn.png"} alt="@shadcn" />
@@ -92,7 +114,10 @@ const Navbar = () => {
                                         </div>
                                     </div>
                                     <div className='flex flex-col items-end justify-center text-gray-600 '>
-                                        <Link to={'/profile'}><Button variant='link'>View Profile <User2 /></Button></Link>
+                                        {
+                                            user && user.role === 'job seekers' &&
+                                            <Link to={'/profile'}><Button variant='link'>View Profile <User2 /></Button></Link>
+                                        }
                                         <Button onClick={logoutHandler} variant='link'>Logout <LucideDoorOpen /></Button>
                                     </div>
                                 </PopoverContent>
