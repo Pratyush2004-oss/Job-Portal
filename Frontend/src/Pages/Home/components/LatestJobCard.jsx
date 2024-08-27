@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge'
 import React from 'react'
 
-const LatestJobCard = ({job}) => {
+const LatestJobCard = ({ job }) => {
     return job && (
         <div className='p-5 rounded-md shadow-xl bg-white border border-gray-100 cursor-pointer'>
             <div>
@@ -16,6 +16,7 @@ const LatestJobCard = ({job}) => {
                 <Badge variant="outline" className={'text-blue-700 font-bold'}>{job.position} Positions</Badge>
                 <Badge variant="outline" className={'text-[#F83002] font-bold'}>{job.jobType}</Badge>
                 <Badge variant="ghost" className={'text-[#7209b7] font-bold'}>{job.salary} LPA</Badge>
+                <Badge variant="ghost" className={'text-green-700 font-bold'}>{job.location}</Badge>
             </div>
         </div>
     )

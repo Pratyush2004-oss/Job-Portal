@@ -30,7 +30,9 @@ const Companies = () => {
                     <CompaniesTable />
                 </div>
             </div>
-            <Footer />
+            <div className='fixed bottom-0 right-0 left-0 pt-32'>
+                <Footer />
+            </div>
         </div>
     )
 }

@@ -8,7 +8,7 @@ import store from '@/redux/redux'
 import { USER_API_END_POINT } from '@/utils/constant'
 import axios from 'axios'
 import { LoaderPinwheel } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
@@ -31,7 +31,7 @@ const Signup = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {loading} = useSelector(store => store.auth)
+    const { loading, user } = useSelector(store => store.auth)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -60,10 +60,15 @@ const Signup = () => {
             toast.error(error.response.data.message);
             console.log(error)
         }
-        finally{
+        finally {
             dispatch(setLoading(false))
         }
     }
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    })
     return (
         <div>
             <Navbar />

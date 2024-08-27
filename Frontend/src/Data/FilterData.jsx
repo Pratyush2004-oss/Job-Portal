@@ -9,6 +9,6 @@ export const filterData = [
   },
   {
     filterType: "Salary",
-    array: ['0-40k', '40k-1L', '1L-3L', '3L-5L', 'above 5L']
+    array: ['0- 3L', '3- 5L', '5- 8L', '8- 13L', '13- 20L']
   },
 ]

@@ -23,7 +23,7 @@ const Hero = () => {
                 <p></p>
             </div>
             <div className='relative outline-none rounded-full border-none w-5/6 mx-auto shadow-lg'>
-                <Input type='text' onChange={(e) => setQuery(e.target.value)} value={query} placeholder='Find your Dream jobs' className='w-full rounded-full mx-auto' />
+                <Input type='text' onChange={(e) => setQuery(e.target.value)} placeholder='Find your Dream jobs' className='w-full rounded-full mx-auto' />
                 <Button onClick={SearchJobHandler} className='absolute rounded-full z-10 top-0 h-full right-0' variant='ghost'><Search /></Button>
             </div>
         </div>
