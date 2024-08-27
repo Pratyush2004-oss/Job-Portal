@@ -44,7 +44,8 @@ export const getAllJobs = async (req, res) => {
         const query = {
             $or: [
                 { title: { $regex: keyword, $options: 'i' } },
-                { description: { $regex: keyword, $options: 'i' } }]
+                { description: { $regex: keyword, $options: 'i' } }
+            ]
         };
         const jobs = await Job.find(query).populate({
             path:"companyId"

@@ -29,7 +29,7 @@ export const applyJob = async (req, res) => {
         }
         // Create new application
         const newApplication = await Application.create({
-            job:jobId,
+            job: jobId,
             applicant: userId
         })
         job.applications.push(newApplication._id);
@@ -91,7 +91,7 @@ export const getApplicants = async (req, res) => {
         })
         if (!job) {
             return res.status(404).json({
-                message: "No job gfound",
+                message: "No job found",
                 success: false
             })
         }
@@ -105,24 +105,24 @@ export const getApplicants = async (req, res) => {
             message: 'Internal Server Error',
             success: false
         })
-        
+
     }
 }
 
 // update Application Status 
-export const updateStatus = async (req,res) => {
+export const updateStatus = async (req, res) => {
     try {
-        const {status} = req.body;
+        const { status } = req.body;
         const applicationId = req.params.id;
-        if(!status){
+        if (!status) {
             return res.status(400).json({
                 message: "Status is required",
                 success: false
             })
         }
         // find the application by applicant Id
-        const application = await Application.findOne({_id:applicationId});
-        if(!application){
+        const application = await Application.findOne({ _id: applicationId });
+        if (!application) {
             return res.status(404).json({
                 message: "No Application found",
                 success: false
@@ -133,8 +133,8 @@ export const updateStatus = async (req,res) => {
         await application.save();
 
         return res.status(200).json({
-            message:"Status updated successfully.",
-            success:true
+            message: "Status updated successfully.",
+            success: true
         })
 
     } catch (error) {

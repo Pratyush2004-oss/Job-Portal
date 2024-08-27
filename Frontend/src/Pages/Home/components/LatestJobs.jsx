@@ -2,8 +2,10 @@ import React from 'react'
 import LatestJobCard from './LatestJobCard'
 import { useSelector } from 'react-redux'
 import store from '@/redux/redux'
+import { Link, useNavigate } from 'react-router-dom'
 
 const LatestJobs = () => {
+  const navigate = useNavigate()
   const { allJobs } = useSelector(store => store.job)
   return (
     <div className='max-w-7xl mx-auto p-2 my-20'>
@@ -12,7 +14,9 @@ const LatestJobs = () => {
       <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 my-5'>
         {
           allJobs.length > 0 ? allJobs.slice(0, 6).map((job) => (
-            <LatestJobCard key={job._id} job={job} />
+            <Link to={`/jobs/description/${job._id}`}>
+              <LatestJobCard key={job._id} job={job} />
+            </Link>
           )) : <span>No Jobs available</span>
         }
       </div>

@@ -1,10 +1,23 @@
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { APPLICATION_API_END_POINT } from '@/utils/constant';
+import axios from 'axios';
 import { MoreVerticalIcon } from 'lucide-react';
 import React from 'react'
+import { toast } from 'sonner';
 
 const ApplicantsTable = ({ applicants }) => {
     const shortlistingStatus = ['Accepted', 'Rejected'];
+
+    const statusHandler = async (status, id) => {
+        try {
+            const res = await axios.post(`${APPLICATION_API_END_POINT}/status/${id}/update`, { status }, { withCredentials: true });
+            if (res.data.success) {
+                toast.success(res.data.message)
+            }
+        } catch (error) {
+            toast.error(error.response.data.message);        }
+    }
     return (
         <div>
             <Table className='table-fixed'>
@@ -38,11 +51,13 @@ const ApplicantsTable = ({ applicants }) => {
                                     <Popover>
                                         <PopoverTrigger><MoreVerticalIcon /></PopoverTrigger>
                                         <PopoverContent className='w-40'>
-                                            {shortlistingStatus.map((status, idx) => (
-                                                <div key={idx}>
-                                                    <span>{status}</span>
-                                                </div>
-                                            ))}
+                                            {shortlistingStatus.map((status, idx) => {
+                                                return (
+                                                    <div key={idx} onClick={() => statusHandler(status, item._id)}>
+                                                        <span className='p-2 cursor-pointer'>{status}</span>
+                                                    </div>
+                                                )
+                                            })}
 
                                         </PopoverContent>
                                     </Popover>

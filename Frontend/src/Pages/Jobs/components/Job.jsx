@@ -15,7 +15,7 @@ const Job = ({ job }) => {
         return Math.floor(timeDifference / (1000 * 24 * 60 * 60));
     }
 
-    return (
+    return job && (
         <div className='p-5 rounded-md shadow-xl bg-white border-gray-200'>
             <div className='flex items-center justify-between'>
                 <p>{daysAgoFunction(job.createdAt) === 0 ? 'Today' : `${daysAgoFunction(job.createdAt)} days ago`}</p>

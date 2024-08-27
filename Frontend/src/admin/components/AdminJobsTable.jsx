@@ -41,12 +41,6 @@ const AdminJobsTable = () => {
                                 <Popover>
                                     <PopoverTrigger><MoreHorizontal className='cursor-pointer' /></PopoverTrigger>
                                     <PopoverContent className='w-40'>
-                                        <Link to={`${job._id}`}>
-                                            <div className='flex justify-end gap-3 items-center'>
-                                                <span>Edit</span>
-                                                <Edit className='w-4' />
-                                            </div>
-                                        </Link>
                                         <Link to={`${job._id}/applicants`}>
                                             <div className='flex justify-end gap-3 items-center'>
                                                 <span>Applications</span>
