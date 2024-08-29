@@ -20,7 +20,7 @@ const ApplicantsTable = ({ applicants }) => {
     }
     return (
         <div>
-            <Table className='table-fixed'>
+            <Table className=''>
                 <TableCaption>A list of your recent applied users</TableCaption>
                 <TableHeader className='bg-slate-300'>
                     <TableRow>
@@ -37,7 +37,7 @@ const ApplicantsTable = ({ applicants }) => {
                         <TableBody>
                             <TableRow key={idx}>
                                 <TableCell>{item.applicant.fullname}</TableCell>
-                                <TableCell>{item.applicant.email}</TableCell>
+                                <TableCell className='text-wrap'>{item.applicant.email}</TableCell>
                                 <TableCell>{item.applicant.phoneNumber}</TableCell>
                                 <TableCell>
                                     {
