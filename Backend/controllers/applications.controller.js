@@ -105,7 +105,6 @@ export const getApplicants = async (req, res) => {
             message: 'Internal Server Error',
             success: false
         })
-
     }
 }
 

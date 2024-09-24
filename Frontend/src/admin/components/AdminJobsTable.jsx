@@ -18,7 +18,7 @@ const AdminJobsTable = () => {
         setfilterjobs(filteredjobs);
     }, [allAdminJobs, searchJobByText])
     return (
-        <div>
+        <div className='h-[50vh] overflow-auto'>
             <Table className='table-fixed'>
                 <TableCaption>A list of your Listed jobs</TableCaption>
                 <TableHeader className='bg-slate-200'>
@@ -42,7 +42,7 @@ const AdminJobsTable = () => {
                                     <PopoverTrigger><MoreHorizontal className='cursor-pointer' /></PopoverTrigger>
                                     <PopoverContent className='w-40'>
                                         <Link to={`${job._id}/applicants`}>
-                                            <div className='flex justify-end gap-3 items-center'>
+                                            <div className='flex items-center justify-end gap-3'>
                                                 <span>Applications</span>
                                                 <Eye className='w-4' />
                                             </div>

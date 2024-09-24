@@ -19,7 +19,7 @@ const CompaniesTable = () => {
         setFilterCompany(filteredCompany);
     },[allCompanies,searchCompanyByText])
     return (
-        <div>
+        <div className='h-[50vh] overflow-auto'>
             <Table>
                 <TableCaption>A list of your recent Companies</TableCaption>
                 <TableHeader className='bg-slate-200'>
@@ -45,7 +45,7 @@ const CompaniesTable = () => {
                                     <PopoverTrigger><MoreHorizontal className='cursor-pointer' /></PopoverTrigger>
                                     <PopoverContent className='w-24'>
                                         <Link to={`${company._id}`}>
-                                            <div className='flex justify-end gap-3 items-center'>
+                                            <div className='flex items-center justify-end gap-3'>
                                                 <span>Edit</span>
                                                 <Edit className='w-4' />
                                             </div>

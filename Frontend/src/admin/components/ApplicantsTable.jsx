@@ -20,7 +20,7 @@ const ApplicantsTable = ({ applicants }) => {
         }
     }
     return (
-        <div>
+        <div className='h-[50vh] overflow-auto'>
             <Table className=''>
                 <TableCaption>A list of your recent applied users</TableCaption>
                 <TableHeader className='bg-slate-300'>
@@ -68,7 +68,7 @@ const ApplicantsTable = ({ applicants }) => {
                     ))
                     )
                         :
-                        <span className='text-lg text-red-400 text-center'>No applications yet</span>
+                        <span className='text-lg text-center text-red-400'>No applications yet</span>
                 }
             </Table>
         </div>

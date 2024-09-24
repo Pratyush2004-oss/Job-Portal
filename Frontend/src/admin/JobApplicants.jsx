@@ -25,13 +25,14 @@ const JobApplicants = () => {
         }
         fetchAllApplicants();
     }, [])
-    return (
+    return applicants && (
         <div>
             <Navbar />
-            <div className='max-w-7xl mx-auto my-10 p-3'>
-                <h1 className='font-bold text-3xl my-3 '>Applicants ({applicants.applications.length})</h1>
+            <div className='p-3 mx-auto my-10 max-w-7xl'>
+                <h1 className='my-3 text-3xl font-bold '>Applicants ({applicants.applications.length})</h1>
                 <ApplicantsTable applicants = {applicants} />
             </div>
+            
         </div>
     )
 }
