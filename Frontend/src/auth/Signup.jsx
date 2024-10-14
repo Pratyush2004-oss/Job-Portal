@@ -56,6 +56,9 @@ const Signup = () => {
                 navigate('/login')
                 toast.success(res.data.message);
             }
+            else {
+                toast.error(res.data.message)
+            }
         } catch (error) {
             toast.error(error.response.data.message);
             console.log(error)
@@ -72,33 +75,33 @@ const Signup = () => {
     return (
         <div>
             <Navbar />
-            <div className='p-5 flex items-center justify-center max-w-7xl mx-auto'>
-                <form onSubmit={handleSubmit} className='md:w-1/2 border-gray-200 rounded-lg p-4 my-10 shadow-md'>
-                    <h1 className='font-bold text-center text-xl mb-5'>Sign Up </h1>
+            <div className='flex items-center justify-center p-5 mx-auto max-w-7xl'>
+                <form onSubmit={handleSubmit} className='p-4 my-10 border-gray-200 rounded-lg shadow-md md:w-1/2'>
+                    <h1 className='mb-5 text-xl font-bold text-center'>Sign Up </h1>
                     {/* Full Name */}
-                    <div className='gap-2 my-3 flex flex-col'>
+                    <div className='flex flex-col gap-2 my-3'>
                         <Label>Full Name</Label>
                         <Input type='text' value={input.fullname} name='fullname' onChange={changeEventHandler} placeholder='Enter your name' />
                     </div>
                     {/* Email */}
-                    <div className='gap-2 my-3 flex flex-col'>
+                    <div className='flex flex-col gap-2 my-3'>
                         <Label>E mail</Label>
                         <Input type='email' value={input.email} name='email' onChange={changeEventHandler} placeholder='Enter your email' />
                     </div>
                     {/* Phone Number */}
-                    <div className='gap-2 my-3 flex flex-col'>
+                    <div className='flex flex-col gap-2 my-3'>
                         <Label>Phone Number</Label>
                         <Input type='text' value={input.phoneNumber} name='phoneNumber' onChange={changeEventHandler} placeholder='Enter your phone number' />
                     </div>
                     {/* Password */}
-                    <div className='gap-2 my-3 flex flex-col'>
+                    <div className='flex flex-col gap-2 my-3'>
                         <Label>Password</Label>
                         <Input type='password' value={input.password} name='password' onChange={changeEventHandler} placeholder='Enter password' />
                     </div>
                     {/* Job type */}
                     <div className='flex flex-col my-3'>
                         <Label>Type</Label>
-                        <RadioGroup className='flex gap-5 items-center p-2'>
+                        <RadioGroup className='flex items-center gap-5 p-2'>
                             <div className="flex items-center space-x-2">
                                 <Input
                                     type='radio'
@@ -124,7 +127,7 @@ const Signup = () => {
                         </RadioGroup>
                     </div>
                     {/* Profile Picture */}
-                    <div className='flex flex-col my-3 gap-2'>
+                    <div className='flex flex-col gap-2 my-3'>
                         <Label>Profile</Label>
                         <Input accept='image/*'
                             onChange={changeFileHandler}
@@ -132,7 +135,7 @@ const Signup = () => {
                             className='cursor-pointer'
                         />
                     </div>
-                    <Button type='submit' disabled={loading} className='w-full my-3'>{loading ? <LoaderPinwheel className='mr-2 w-4 h-4 animate-spin' /> : 'Submit'}</Button>
+                    <Button type='submit' disabled={loading} className='w-full my-3'>{loading ? <LoaderPinwheel className='w-4 h-4 mr-2 animate-spin' /> : 'Submit'}</Button>
                     <span className='text-sm'>Already have an account <Link to={'/login'}><span className='font-bold text-blue-600'>Login</span></Link></span>
                 </form>
             </div>
